@@ -37,6 +37,22 @@ def friendly(msg):
     return msg[:300] or "Could not read that link."
 
 
+def pinterest_streams(formats):
+    """Pinterest only lists HLS playlists, but each quality is one fragmented-MP4 file (.cmfv) beside its
+    playlist, which plays as a normal mp4. Offer those so no stream merging is needed."""
+    best = {}
+    for f in formats:
+        u = f.get("url") or ""
+        if f.get("protocol") == "m3u8_native" and re.match(r"https://[\w.-]*pinimg\.com/.+\.m3u8$", u) and f.get("vcodec") not in (None, "none"):
+            h = f.get("height") or 0
+            if h not in best or (f.get("tbr") or 0) > (best[h].get("tbr") or 0):
+                best[h] = f
+    options = [{"label": f"{h}p" if h else "Video", "url": best[h]["url"][:-5] + ".cmfv", "ext": "mp4", "kind": "video"} for h in sorted(best, reverse=True)]
+    if options:
+        options[0]["label"] = "Best quality" + (f" ({options[0]['label']})" if options[0]["label"] != "Video" else "")
+    return options
+
+
 def build(info):
     formats = info.get("formats") or [info]
     direct = lambda f: f.get("url") and f.get("protocol") in ("https", "http")
@@ -53,6 +69,8 @@ def build(info):
         options.append({"label": f"{h}p" if h else "Video", "url": f["url"], "ext": f.get("ext") or "mp4", "kind": "video"})
     if options:
         options[0]["label"] = "Best quality" + (f" ({options[0]['label']})" if options[0]["label"] != "Video" else "")
+    if not options:
+        options = pinterest_streams(formats)
     audio = [f for f in formats if direct(f) and f.get("vcodec") in (None, "none") and f.get("acodec") not in (None, "none")]
     if audio:
         a = max(audio, key=lambda f: f.get("abr") or 0)
