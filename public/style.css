@@ -862,3 +862,6 @@ button.sign:focus-visible { outline: 3px solid var(--accent); outline-offset: 4p
 /* ten social icons: wrap on narrow screens instead of widening the page */
 .foot-social { flex-wrap: wrap; }
 @media (max-width: 600px) { .soc { width: 32px; height: 32px; } }
+
+/* eleven icons stay on one line on wide screens */
+@media (min-width: 1200px) { .foot-social { flex-wrap: nowrap; gap: 6px; } .soc { width: 34px; height: 34px; } }

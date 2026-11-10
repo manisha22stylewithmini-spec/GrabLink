@@ -3,7 +3,7 @@
 window.SITE = {
   name: 'Manisha Baroliya',             // shown as "Designed & built by …"
   tagline: '',                       // optional extra text after your name (leave '' to hide)
-  contact: '#',                      // Linktree (or any) link for the call icon
+  contact: 'https://wa.me/917290892486',  // opens WhatsApp chat (call icon in the card)
   projects: [                        // header → "More info" menu. Start a url with / for pages on this site
     { name: 'Case study', note: 'Why I built it and what I learned', url: '/case-study.html' },
     { name: 'Portfolio', note: 'Process, wireframes and final screens', url: '/portfolio.html' },
@@ -20,6 +20,7 @@ window.SITE = {
     { key: 'pinterest', label: 'Pinterest', url: 'https://in.pinterest.com/uxdesignermanisha/' },
     { key: 'github', label: 'GitHub', url: 'https://github.com/manisha22stylewithmini-spec' },
     { key: 'muzli', label: 'Muzli', url: 'https://me.muz.li/manisha_baroliya' },
+    { key: 'whatsapp', label: 'WhatsApp', url: 'https://wa.me/917290892486' },
   ],
 
 };

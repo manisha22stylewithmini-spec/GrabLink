@@ -1,6 +1,6 @@
 // Minimal service worker: makes the app installable and keeps the shell available offline.
 // API calls are never cached.
-const CACHE = 'grab-video-v10';
+const CACHE = 'grab-video-v11';
 const SHELL = ['/', '/style.css', '/app.js', '/manifest.webmanifest', '/icons/icon-192.png', '/icons/icon-512.png'];
 
 self.addEventListener('install', e => {
