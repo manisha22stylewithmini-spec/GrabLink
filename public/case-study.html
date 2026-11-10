@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbfaff">
+<title>GrabLink case study — Manisha Baroliya</title>
+<meta name="description" content="Why I designed GrabLink: a free video downloader with no ads, no paid plan and no account. The point of view, the pain points, the decisions and what broke along the way.">
+<link rel="icon" type="image/png" href="/icons/favicon-64.png">
+<link rel="canonical" href="https://grablink-manishabaroliya.vercel.app/case-study.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GrabLink by Manisha Baroliya">
+<meta property="og:title" content="GrabLink case study — Manisha Baroliya">
+<meta property="og:description" content="The point of view, pain points, decisions and honest test results behind a free video downloader with no ads, paid plan or account.">
+<meta property="og:url" content="https://grablink-manishabaroliya.vercel.app/case-study.html">
+<meta property="og:image" content="https://grablink-manishabaroliya.vercel.app/shots/og-case-study.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="GrabLink app screens beside the headline and the words No ads, No paid plan, No account">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GrabLink case study — Manisha Baroliya">
+<meta name="twitter:description" content="The point of view, pain points, decisions and honest test results behind a free video downloader with no ads, paid plan or account.">
+<meta name="twitter:image" content="https://grablink-manishabaroliya.vercel.app/shots/og-case-study.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="story.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the case study</a>
+
+<header class="bar">
+  <div class="wrap">
+    <a href="/" aria-label="GrabLink home"><img src="/brand/logo-wide.png" alt="Manisha Baroliya" width="587" height="302"></a>
+    <nav aria-label="More info">
+      <div class="menu" id="projMenu">
+        <button type="button" class="menu-btn" id="projBtn" aria-expanded="false" aria-controls="projList">
+          More info
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul class="menu-list" id="projList" hidden><li><a class="menu-item is-active" href="/case-study.html" aria-current="page"><b>Case study</b><span>Why I built it and what I learned</span></a></li><li><a class="menu-item" href="/portfolio.html"><b>Portfolio</b><span>Process, wireframes and final screens</span></a></li><li><a class="menu-item" href="/"><b>Live project</b><span>The GrabLink app you are using</span></a></li></ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap">
+      <span class="kicker">Case study · Product design</span>
+      <h1>Saving a video from a link shouldn’t cost you <span class="grad">ads, an account or a subscription.</span></h1>
+      <p class="lead" style="margin-top:22px">GrabLink is a free video downloader for a link you already have. This is the thinking behind it: who it’s for, what hurts today, the choices I made and the parts that broke when I tested them for real.</p>
+      <ul class="chips" aria-label="Design constraints">
+        <li class="chip">No ads</li><li class="chip">No paid plan</li><li class="chip">No account</li>
+      </ul>
+      <dl class="meta">
+        <div><dt>Role</dt><dd>Product designer — research, UX, UI and front-end</dd></div>
+        <div><dt>Team</dt><dd>Solo project</dd></div>
+        <div><dt>Surfaces</dt><dd>Website, installable app (PWA), Chrome extension</dd></div>
+        <div><dt>Status</dt><dd>Live, v1.1 — still learning</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="wrap cs">
+    <aside class="toc" aria-label="On this page">
+      <p>On this page</p>
+      <ol>
+        <li><a href="#pov">Point of view</a></li>
+        <li><a href="#pain">The pain</a></li>
+        <li><a href="#people">Who it’s for</a></li>
+        <li><a href="#principles">Principles</a></li>
+        <li><a href="#landscape">Landscape</a></li>
+        <li><a href="#decisions">Key decisions</a></li>
+        <li><a href="#reality">The reality check</a></li>
+        <li><a href="#solution">What shipped</a></li>
+        <li><a href="#trust">Trust &amp; access</a></li>
+        <li><a href="#measure">How I’ll know</a></li>
+        <li><a href="#v2">Version 2.0</a></li>
+        <li><a href="#next">Reflection</a></li>
+      </ol>
+    </aside>
+
+    <div class="article">
+      <section class="section" id="how">
+        <div class="note"><b>How to read this.</b> Claims I could check by building and testing the product are marked <span class="tag ok">Verified</span>. Beliefs I haven’t yet tested with real users are marked <span class="tag warn">Hypothesis</span>. Those are my first research questions, not conclusions.</div>
+        <h2 style="margin-top:34px">The short version</h2>
+        <ul class="ul">
+          <li><b>Problem:</b> the simplest job on the internet — “I have the link, give me the file” — is usually wrapped in ads, upsells and detours.</li>
+          <li><b>Idea:</b> one box, one tap. Take the file inside the app you’re already in and keep the business model out of the screen, because there isn’t one.</li>
+          <li><b>Hard lesson:</b> big platforms block hosted downloaders. “Free and honest” only holds if the product tells you the truth and does the heavy lifting on your own device.</li>
+        </ul>
+      </section>
+
+      <section class="section" id="pov">
+        <span class="num">01</span>
+        <h2>My point of view</h2>
+        <blockquote class="quote">
+          <p>If you already hold the link to a video you’re allowed to keep, getting the file should take one paste and one tap. Everything else on the screen is somebody else’s business model.</p>
+          <cite>— The belief behind GrabLink</cite>
+        </blockquote>
+        <h3>Why this is a design problem, not just a tooling one</h3>
+        <p>Downloaders already exist, so the gap isn’t capability. It’s <b>the experience around the capability</b>: how many decisions you’re forced to make, how much you have to distrust the page, and how far you travel from the app where you found the video. I treated those as the product, and the extraction engine as a commodity.</p>
+      </section>
+
+      <section class="section" id="pain">
+        <span class="num">02</span>
+        <h2>The pain points</h2>
+        <p>These are the frictions I set out to remove. Honest status on each, because a case study that only has confirmed facts usually hasn’t asked enough questions.</p>
+        <div class="pain">
+          <article class="card"><h3>The page is built to sell, not to save</h3><span class="tag warn">Hypothesis</span><p>Ad-funded downloaders tend to surround the real button with look-alike buttons, pop-ups and redirects. You spend your attention working out which control is real.</p></article>
+          <article class="card"><h3>The good version is behind a paywall</h3><span class="tag warn">Hypothesis</span><p>Higher quality, longer videos or “no limit” are common upsells. A task that costs the provider almost nothing becomes a subscription decision.</p></article>
+          <article class="card"><h3>Too many steps for one job</h3><span class="tag warn">Hypothesis</span><p>Copy the link, leave the app, open a tool, paste, wait, choose, dismiss something, save. The link is already in your hand; the route to the file shouldn’t be longer than the video.</p></article>
+          <article class="card"><h3>The link has to leave the app it lives in</h3><span class="tag ok">Verified</span><p>Phone share menus rarely list a downloader. The web’s Share Target works only in Chrome on Android, Windows and ChromeOS — not on macOS or iOS — so “just share it” isn’t universal.</p></article>
+          <article class="card"><h3>Failures don’t explain themselves</h3><span class="tag warn">Hypothesis</span><p>“Download failed” gives you nothing to act on. Was it private? Blocked? Not a video? People retry the same thing, or give up.</p></article>
+          <article class="card"><h3>Trust is expensive</h3><span class="tag warn">Hypothesis</span><p>Sign-ups, notification prompts on first visit and unclear data use make a one-off task feel like a commitment.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="people">
+        <span class="num">03</span>
+        <h2>Who it’s for</h2>
+        <p>Three starting profiles, written as jobs to be done. They’re proto-personas — assumptions to validate in the first round of interviews.</p>
+        <div class="grid g3">
+          <article class="card"><h3>The reference collector</h3><p style="margin-top:10px">A designer or creator saving motion references from Pinterest, Dribbble or X.</p><p><i>When I find motion worth studying, I want it on my machine in seconds, so I can annotate it and build a moodboard.</i></p></article>
+          <article class="card"><h3>The content manager</h3><p style="margin-top:10px">Someone repurposing clips their brand owns or has permission to use.</p><p><i>When I need an approved clip, I want the original file, so I don’t re-record or screen-capture it at lower quality.</i></p></article>
+          <article class="card"><h3>The offline learner</h3><p style="margin-top:10px">A student saving a tutorial for a patchy connection.</p><p><i>When I’m about to lose signal, I want the video saved, so I can finish the lesson on the move.</i></p></article>
+        </div>
+        <h3>What they have in common</h3>
+        <p>None of them wants a relationship with a downloader. They want to be <b>in and out</b>. That’s the design brief in one line.</p>
+      </section>
+
+      <section class="section" id="principles">
+        <span class="num">04</span>
+        <h2>Design principles</h2>
+        <div class="grid g2">
+          <article class="card"><h3>Free means free</h3><p style="margin-top:8px">No ads, no paid tier, no account. If an idea needs one of those to work, the idea changes.</p></article>
+          <article class="card"><h3>One job per screen</h3><p style="margin-top:8px">The first screen asks for a link. Nothing competes with that.</p></article>
+          <article class="card"><h3>Meet the link where it lives</h3><p style="margin-top:8px">Share menu first, clipboard second, typing last.</p></article>
+          <article class="card"><h3>Ask before assuming</h3><p style="margin-top:8px">Clipboard, notifications and personalisation each need a clear yes.</p></article>
+          <article class="card"><h3>Say what happened</h3><p style="margin-top:8px">Errors name the cause in plain words and tell you what to try next.</p></article>
+          <article class="card"><h3>Respect the content</h3><p style="margin-top:8px">For content you own or have permission to save. Private stays private.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="landscape">
+        <span class="num">05</span>
+        <h2>The landscape</h2>
+        <p>Rather than review individual products, I mapped the <b>patterns by category</b> to find where a different promise could sit.</p>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Approach</th><th>Ads</th><th>Paywall</th><th>Friction</th><th>Typical weak spot</th></tr></thead>
+            <tbody>
+              <tr><td>Ad-funded web tools</td><td>Heavy</td><td>Often for HD or bulk</td><td>Pop-ups, redirects</td><td>Distrust; fake buttons</td></tr>
+              <tr><td>Paid desktop apps</td><td>None</td><td>Licence or subscription</td><td>Download, install, update</td><td>Heavy for a one-off task</td></tr>
+              <tr><td>Browser extensions</td><td>Varies</td><td>Varies</td><td>Install and permissions</td><td>Tied to one browser</td></tr>
+              <tr class="us"><td>GrabLink</td><td>None</td><td>None</td><td>Paste or share; install optional</td><td>Platforms can block it — and it says so</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:12px;font-size:.9rem;color:var(--muted)">General category patterns from my own reading of the space, not a review of named products. To be backed by a proper comparison in the next round.</p>
+        <h3>The opening</h3>
+        <p>Nobody owns “<span class="hl">no ads, no paywall, no account, and it tells you the truth when it can’t help</span>”. That became the positioning.</p>
+      </section>
+
+      <section class="section" id="decisions">
+        <span class="num">06</span>
+        <h2>Key design decisions</h2>
+        <p>Each decision has a cost. I’ve kept the trade-off next to the reason.</p>
+        <div class="decision">
+          <article class="card"><h3>1 · One finder, two modes</h3><dl>
+            <div><dt>Decision</dt><dd>A single box with a “By link / By keyword” toggle, instead of two inputs.</dd></div>
+            <div><dt>Because</dt><dd>One obvious place to start. The toggle remembers your last choice.</dd></div>
+            <div><dt>Trade-off</dt><dd>Keyword search returns real results for YouTube only; other platforms don’t allow outside search, so those link out. The UI says that instead of faking results.</dd></div></dl></article>
+
+          <article class="card"><h3>2 · The website does one thing; the app does the rest</h3><dl>
+            <div><dt>Decision</dt><dd>The site is a link box and a platform list. History, search, settings and alerts live only in the installed app.</dd></div>
+            <div><dt>Because</dt><dd>A first visit should ask for exactly one thing. Features earn their place once someone chooses to install.</dd></div>
+            <div><dt>Trade-off</dt><dd>Two layouts from one codebase, plus three app sizes (mobile, tablet, a compact laptop window). I kept it manageable with shared components and visibility classes.</dd></div></dl></article>
+
+          <article class="card"><h3>3 · Take the file inside the app</h3><dl>
+            <div><dt>Decision</dt><dd>Downloads stream through GrabLink with a progress bar and save to the device. No bouncing to another site.</dd></div>
+            <div><dt>Because</dt><dd>The detour is where ads and fake buttons live. Removing the detour removes the reason to show them.</dd></div>
+            <div><dt>Trade-off</dt><dd>It costs bandwidth, so the proxy only talks to an allow-list of known media hosts. It is deliberately not an open proxy.</dd></div></dl></article>
+
+          <article class="card"><h3>4 · Be in the Share menu, with a clipboard fallback</h3><dl>
+            <div><dt>Decision</dt><dd>Register as a share target and, where that isn’t supported, offer to read a copied link when you open the app.</dd></div>
+            <div><dt>Because</dt><dd>It removes the copy-and-switch steps for people who can use it.</dd></div>
+            <div><dt>Trade-off</dt><dd>Share Target isn’t available on macOS or iOS. The clipboard fallback asks permission first, because reading the clipboard is sensitive.</dd></div></dl></article>
+
+          <article class="card"><h3>5 · Consent before personalisation</h3><dl>
+            <div><dt>Decision</dt><dd>Suggestions and notifications stay off until you opt in. Data lives on the device, with no account.</dd></div>
+            <div><dt>Because</dt><dd>A one-off tool shouldn’t ask for trust it hasn’t earned.</dd></div>
+            <div><dt>Trade-off</dt><dd>Weaker suggestions than a service that watches everything. I accept that.</dd></div></dl></article>
+
+          <article class="card"><h3>6 · A quiet interface with one loud action</h3><dl>
+            <div><dt>Decision</dt><dd>Light, calm surfaces; lime is reserved for the primary action. The traffic-light scene on the website is the brand device (stop, ready, go), and its sign doubles as the “Download app” button.</dd></div>
+            <div><dt>Because</dt><dd>When nothing competes, the one coloured thing is the next step.</dd></div>
+            <div><dt>Trade-off</dt><dd>The scene only appears on wide screens and never inside the app, so the app stays fast and focused.</dd></div></dl></article>
+        </div>
+      </section>
+
+      <section class="section" id="reality">
+        <span class="num">07</span>
+        <h2>The reality check: what broke when I tested it</h2>
+        <p>A promise of “free and honest” is only worth something if it survives contact with the real platforms. I tested the live product with real links on 4 November 2026.</p>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Platform</th><th>What happened</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>YouTube</td><td>Asks the hosted server to “confirm you’re not a bot”, so it can’t read the video.</td><td><span class="tag bad">Blocked</span></td></tr>
+              <tr><td>Instagram</td><td>Needs a logged-in session.</td><td><span class="tag bad">Blocked</span></td></tr>
+              <tr><td>Vimeo</td><td>Now requires a login for the web client.</td><td><span class="tag bad">Blocked</span></td></tr>
+              <tr><td>TikTok</td><td>The video is found and qualities are listed, but TikTok’s file host refuses the final download from our server.</td><td><span class="tag warn">Partial</span></td></tr>
+              <tr><td>Pinterest</td><td>Short <code>pin.it</code> links failed with “no directly downloadable file”. Pinterest only lists streaming playlists, but each quality also exists as one complete file. Offering that file fixed it; a 5-second test pin downloaded and played.</td><td><span class="tag ok">Fixed</span></td></tr>
+              <tr><td>X</td><td>Worked in my test only when the post actually contained a video.</td><td><span class="tag warn">Partial</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>What this changed in my thinking</h3>
+        <ul class="ul">
+          <li><b>Hosted extraction can’t be promised everywhere.</b> Big platforms treat server traffic differently from a person’s own browser. No amount of interface design fixes that.</li>
+          <li><b>The business-model constraint is an architecture constraint.</b> With no ads or fees there’s no budget for expensive infrastructure, so the sustainable design pushes the work to the user’s own device.</li>
+          <li><b>Honest errors became a feature.</b> When a platform blocks the request, the message says it’s private, needs a login, or that the site is blocking the server, rather than a generic failure.</li>
+        </ul>
+        <div class="note"><b>Decision.</b> Treat the website as the front door and the install page, and move the real work onto the person’s device through the installed app, the local mode and the Chrome extension. The extension already saves Instagram videos using the person’s own login, and is the pattern I’d extend to other platforms.</div>
+      </section>
+
+      <section class="section" id="solution">
+        <span class="num">08</span>
+        <h2>What shipped</h2>
+        <ol class="steps">
+          <li><div><b>Paste or share a link</b><span>One box. Or share to GrabLink; or open the app and accept the offer to use the link you just copied.</span></div></li>
+          <li><div><b>Pick a quality</b><span>Best quality first, other sizes below, audio-only when available.</span></div></li>
+          <li><div><b>Watch it save</b><span>A progress bar, then the file goes to your device. No second page, no pop-up.</span></div></li>
+          <li><div><b>Find it again</b><span>History stays on the device, filterable by platform.</span></div></li>
+        </ol>
+        <h3>The finished screens</h3>
+        <div class="phones4" style="margin:6px 0 10px">
+          <figure class="phone-fig"><div class="body"><img src="shots/app-home.jpg" width="780" height="1688" alt="App home with a link box and a By link and By keyword toggle" loading="lazy"></div><figcaption>Home<span>One box to start</span></figcaption></figure>
+          <figure class="phone-fig"><div class="body"><img src="shots/app-result.jpg" width="780" height="1688" alt="App result with a preview, quality menu and Download button" loading="lazy"></div><figcaption>Result<span>Quality, then Download</span></figcaption></figure>
+          <figure class="phone-fig"><div class="body"><img src="shots/app-settings.jpg" width="780" height="1688" alt="App settings with default quality and optional toggles" loading="lazy"></div><figcaption>Settings<span>Optional, off by default</span></figcaption></figure>
+          <figure class="phone-fig"><div class="body"><img src="shots/app-alerts.jpg" width="780" height="1688" alt="App alerts with consent toggles and a privacy policy row" loading="lazy"></div><figcaption>Alerts<span>Consent before anything</span></figcaption></figure>
+        </div>
+        <p style="font-size:.9rem;color:var(--muted)">Screens from the running product. Third-party video thumbnails are blurred.</p>
+        <h3>What’s in the box</h3>
+        <ul class="ul">
+          <li>Link finder with a keyword mode and a platform filter (a 3-per-row grid).</li>
+          <li>In-app downloading with progress, plus a share sheet when a link arrives from another app.</li>
+          <li>History, settings and optional alerts, all behind a clear consent step.</li>
+          <li>Three layouts: phone, tablet and a compact laptop window for the installed app.</li>
+          <li>A Chrome extension that adds a GrabLink tile to Instagram’s Share dialog.</li>
+        </ul>
+        <h3>Microcopy that tells the truth</h3>
+        <div class="card"><p><b>Instead of:</b> “Download failed.”</p><p><b>It says:</b> “This video is private, needs a login, or the site is blocking this server, so it cannot be downloaded.”</p><p style="margin-top:10px;color:var(--muted);font-size:.94rem">The reader learns it isn’t their fault and what the likely causes are. It’s still not a solution, which is why the on-device route matters.</p></div>
+      </section>
+
+      <section class="section" id="trust">
+        <span class="num">09</span>
+        <h2>Trust, privacy and access</h2>
+        <ul class="ul">
+          <li><span class="tag ok">Verified</span> No account. History and settings are stored on the device only.</li>
+          <li><span class="tag ok">Verified</span> Sheets use the native dialog element, so focus handling comes from the browser; icon buttons carry text labels; there’s a visible focus ring.</li>
+          <li><span class="tag ok">Verified</span> Clipboard reading, notifications and personalisation each ask first and can be turned off.</li>
+          <li><span class="tag ok">Verified</span> The proxy only fetches from an allow-list of media hosts.</li>
+          <li><span class="tag warn">Known gap</span> The pages load fonts from Google Fonts, a third-party request. Self-hosting them would remove it.</li>
+          <li><span class="tag warn">Known gap</span> I haven’t yet run a screen-reader pass or a contrast audit across every state. That’s next on the list.</li>
+        </ul>
+        <h3>Responsibility</h3>
+        <p>GrabLink says plainly that it’s for content you own or have permission to save, and that private videos can’t be downloaded. It doesn’t try to get around protected or private content. A free tool is easy to misuse; the design should not pretend otherwise.</p>
+      </section>
+
+      <section class="section" id="measure">
+        <span class="num">10</span>
+        <h2>How I’ll know it works</h2>
+        <p>I haven’t run this product through user testing yet, so I’m not claiming results. These are the measures and the method I’ll use. Targets are set after a first baseline.</p>
+        <div class="grid g2">
+          <article class="card"><div class="stat">Time to first file<small>Median seconds from landing to a saved file, in moderated sessions.</small></div></article>
+          <article class="card"><div class="stat">Link → file success<small>Share of attempts that end in a saved file, per platform.</small></div></article>
+          <article class="card"><div class="stat">Retries per task<small>How often people repeat the same step. A proxy for unclear errors.</small></div></article>
+          <article class="card"><div class="stat">Install and return<small>People who install from the site and open the app again within a week.</small></div></article>
+        </div>
+        <p style="margin-top:16px"><b>Method:</b> five moderated task tests on phone and laptop, plus short follow-up interviews. I’d avoid third-party analytics so the privacy promise stays intact, using opt-in counters if numbers are needed later.</p>
+      </section>
+
+      <section class="section" id="v2">
+        <span class="num">11</span>
+        <h2>Version 2.0 — from “download” to “it’s in your gallery”</h2>
+        <blockquote class="quote">
+          <p>The finish line isn’t a file in a Downloads folder. It’s the video, sitting in your gallery, one tap after you pressed Share.</p>
+          <cite>— The vision for the next version</cite>
+        </blockquote>
+        <h3>The problem version 1 still leaves</h3>
+        <p>Even when everything works, version 1 asks you to open GrabLink, wait, then find the file and move it to Photos. On a phone, that last stretch is where people lose the thread. And on the platforms that block hosted tools, it often doesn’t work at all.</p>
+
+        <h3>The experience I want</h3>
+        <ol class="steps">
+          <li><div><b>Tap Share in any app</b><span>Instagram, Pinterest, X, TikTok, YouTube, a browser. GrabLink sits in the same share row as everything else.</span></div></li>
+          <li><div><b>A small sheet, not a whole app</b><span>It slides up over where you are: a thumbnail, the best quality already chosen, one button, <i>Save to gallery</i>. A setting can make even that automatic.</span></div></li>
+          <li><div><b>See it land</b><span>A progress ring, then a calm confirmation: “Saved to Photos · Open · Undo”. Nothing else to dismiss.</span></div></li>
+          <li><div><b>Stay where you were</b><span>You return to the feed you were scrolling. GrabLink never hijacks the screen.</span></div></li>
+        </ol>
+
+        <h3>Where the real value is</h3>
+        <div class="grid g2">
+          <article class="card"><h3>One tap to the gallery</h3><p style="margin-top:8px">A GrabLink album is created for you. No Downloads folder, no file manager, no moving things around.</p></article>
+          <article class="card"><h3>Video, photos and covers</h3><p style="margin-top:8px">Save the video, a photo post or carousel, or just the cover image, from the same share tap.</p></article>
+          <article class="card"><h3>Already saved? It tells you</h3><p style="margin-top:8px">If that link is already in your gallery, it says so instead of making a duplicate copy.</p></article>
+          <article class="card"><h3>Works on a weak connection</h3><p style="margin-top:8px">No signal? The save is queued and finishes when you’re back online, with a quiet notification.</p></article>
+          <article class="card"><h3>Does the work on your phone</h3><p style="margin-top:8px">Reading the video from your own device and login is what lets it work where hosted tools get blocked (see the reality check).</p></article>
+          <article class="card"><h3>Still free, still no account</h3><p style="margin-top:8px">No ads, no subscription, no sign-up. The principles from version 1 don’t change.</p></article>
+        </div>
+
+        <h3>Is it feasible? An honest look</h3>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Platform</th><th>How it could work</th><th>Catch</th></tr></thead>
+            <tbody>
+              <tr><td>Android</td><td>A real share target that saves straight into the gallery’s Movies and Pictures folders.</td><td>Needs a native app for the cleanest result. The web app can already receive shares, but saving to the gallery is limited.</td></tr>
+              <tr><td>iPhone</td><td>A native share extension that saves to Photos with add-only permission.</td><td>Extensions have tight memory and time limits, the web app can’t receive shares at all, and Apple’s developer programme costs money.</td></tr>
+              <tr><td>Desktop</td><td>The Chrome extension saves to a chosen folder in one click.</td><td>There’s no “gallery” on desktop, so the promise becomes “saved to your folder”.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:12px;font-size:.9rem;color:var(--muted)">This is a plan to test, not a promise. I’ve not built or validated any of version 2.0 yet.</p>
+
+        <h3>What could stop it</h3>
+        <ul class="ul">
+          <li><b>App-store policy.</b> Stores can reject or remove downloaders, and platforms’ terms may object. I’d design around content you own or have permission to save, and check each store’s rules before building.</li>
+          <li><b>Permission fatigue.</b> Photos access, notifications and clipboard are three asks. Version 2.0 would request each only at the moment it’s needed.</li>
+          <li><b>Cost versus the “free” promise.</b> Store fees and maintenance are my costs. The test is whether I can carry them without adding ads or a paid tier.</li>
+        </ul>
+
+        <h3>How I’d validate it before building</h3>
+        <ul class="ul">
+          <li>Low-fidelity wireframes of the share sheet and confirmation states (see the portfolio).</li>
+          <li>A “wizard of Oz” test: five people use a clickable prototype while I do the saving by hand, to see if one tap is really enough.</li>
+          <li><b>Measure:</b> taps from Share to saved (target: two or fewer), time from Share to saved, and how often people open the full app afterwards.</li>
+        </ul>
+      </section>
+
+      <section class="section" id="next">
+        <span class="num">12</span>
+        <h2>Reflection and what’s next</h2>
+        <h3>What I’d do differently</h3>
+        <ul class="ul">
+          <li>Test the riskiest assumption first: <i>can the platforms be read at all from a hosted server?</i> I designed the experience before I knew the answer.</li>
+          <li>Write the honest error states before the happy path, since for some platforms they’re the main path.</li>
+        </ul>
+        <h3>Next</h3>
+        <ul class="ul">
+          <li>Extend the extension to YouTube, X, Pinterest and TikTok, reading the page you’re already on.</li>
+          <li>Run the five-person task test and replace every <span class="tag warn">Hypothesis</span> tag with evidence.</li>
+          <li>Self-host fonts and complete an accessibility audit.</li>
+        </ul>
+        <div class="next" style="margin-top:34px">
+          <h2>See the work, not just the thinking.</h2>
+          <a class="btn" href="portfolio.html">View the portfolio →</a>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>Designed &amp; built by <b>Manisha Baroliya</b></span>
+    <ul class="foot-social" id="socialList" aria-label="Connect with the designer"></ul>
+    <span><a href="portfolio.html">Portfolio</a> · <a href="/">GrabLink</a></span>
+  </div>
+</footer>
+<script src="site-config.js"></script>
+<script src="story.js"></script>
+</body>
+</html>

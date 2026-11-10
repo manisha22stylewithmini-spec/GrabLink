@@ -265,7 +265,7 @@ async function retryPendingSave() {
 }
 
 const setProg = (el, f) => { el.hidden = false; el.firstElementChild.style.width = f == null ? '100%' : Math.round(f * 100) + '%'; el.classList.toggle('indet', f == null); };
-const failMsg = e => (/refused|blocked|403/i.test(e.message) ? 'That site would not let the app save this one. Try another quality, or another video.' : e.message);
+const failMsg = e => (/refused|blocked|403|denied/i.test(e.message) ? "This site won't let GrabLink save this one right now. Try another quality, or open the original post." : (/failed to fetch|network/i.test(e.message) ? 'The connection dropped while saving. Check your internet and try again.' : (e.message || 'Could not save this one. Please try again.')));
 
 $('dl').addEventListener('click', e => { e.preventDefault(); startDownload(); });
 $('saveNow').addEventListener('click', async () => { if (await retryPendingSave()) { $('saveNow').hidden = true; toast('Saved'); } });
@@ -284,11 +284,8 @@ async function startDownload() {
     addHistory({ ...current, quality: label });
     if (saved) toast('Saved to your device'); else { $('saveNow').hidden = false; toast('Tap “Save to my device” to finish'); }
   } catch (err) {
-    // On the plain website we may still hand the file to the browser; inside the app we never leave it.
-    if (!isApp && current.options) {
-      window.open(current.options[Number(picked)]?.url, '_blank', 'noopener');
-      showError('Your browser opened the video in a new tab. Choose "Save video as" there.');
-    } else showError(failMsg(err));
+    // Never send people to a raw file address: those pages show server errors, not videos.
+    showError(failMsg(err));
   } finally {
     btn.classList.remove('busy');
     btn.textContent = 'Download';
@@ -762,14 +759,21 @@ $('signInstall').addEventListener('click', install);
   $('makerName').textContent = S.name || '';
   $('makerTag').textContent = S.tagline ? ` · ${S.tagline}` : '';
   $('year').textContent = new Date().getFullYear();
-  $('projList').innerHTML = (S.projects || []).map(p => `<li>${link(p.url, `<b>${esc(p.name)}</b><span>${esc(p.note || '')}</span>`, 'menu-item')}</li>`).join('');
+  // internal pages open in the same tab and the one you're on gets the active style
+  const here = location.pathname.replace(/index\.html$/, '') || '/';
+  $('projList').innerHTML = (S.projects || []).map(p => {
+    const inner = `<b>${esc(p.name)}</b><span>${esc(p.note || '')}</span>`;
+    if (!/^\//.test(p.url || '')) return `<li>${link(p.url, inner, 'menu-item')}</li>`;
+    const active = p.url.replace(/index\.html$/, '') === here;
+    return `<li><a class="menu-item${active ? ' is-active' : ''}" href="${esc(p.url)}"${active ? ' aria-current="page"' : ''}>${inner}</a></li>`;
+  }).join('');
   $('socialList').innerHTML = (S.socials || []).map(s =>
     `<li>${link(s.url, `<img src="/logos/${esc(s.key)}.png" alt="" width="36" height="36">`, 'soc', s.label)}</li>`).join('');
 
   // links without a real url yet
   document.addEventListener('click', e => { const a = e.target.closest('a[data-soon]'); if (a) { e.preventDefault(); toast('Link coming soon'); } });
 
-  // "More projects" dropdown
+  // "More info" dropdown
   const btn = $('projBtn'), list = $('projList');
   const setOpen = open => { list.hidden = !open; btn.setAttribute('aria-expanded', String(open)); };
   btn.addEventListener('click', () => setOpen(list.hidden));

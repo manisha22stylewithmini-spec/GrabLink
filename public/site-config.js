@@ -1,19 +1,25 @@
 // Your details for the website header and footer. Edit the text and links here; nothing else needs to change.
 // Leave a url as '#' until you have it — it shows "coming soon" instead of a broken link.
 window.SITE = {
-  name: 'Manisha Barol',             // shown as "Designed & built by …"
+  name: 'Manisha Baroliya',             // shown as "Designed & built by …"
   tagline: '',                       // optional extra text after your name (leave '' to hide)
   contact: '#',                      // Linktree (or any) link for the call icon
-  projects: [                        // header → "More projects"
-    { name: 'Project one', note: 'Short description', url: '#' },
-    { name: 'Project two', note: 'Short description', url: '#' },
-    { name: 'Project three', note: 'Short description', url: '#' },
+  projects: [                        // header → "More info" menu. Start a url with / for pages on this site
+    { name: 'Case study', note: 'Why I built it and what I learned', url: '/case-study.html' },
+    { name: 'Portfolio', note: 'Process, wireframes and final screens', url: '/portfolio.html' },
+    { name: 'Live project', note: 'The GrabLink app you are using', url: '/' },
   ],
-  socials: [                         // footer icons; key must match a logo in /logos
-    { key: 'instagram', label: 'Instagram', url: '#' },
-    { key: 'x', label: 'X', url: '#' },
-    { key: 'linkedin', label: 'LinkedIn', url: '#' },
-    { key: 'dribbble', label: 'Dribbble', url: '#' },
-    { key: 'pinterest', label: 'Pinterest', url: '#' },
+  socials: [                         // footer icons on every page; key must match a logo in /logos
+    { key: 'linkedin', label: 'LinkedIn', url: 'https://www.linkedin.com/in/manisha-baroliya-488016265/' },
+    { key: 'behance', label: 'Behance', url: 'https://www.behance.net/manishabarol2023' },
+    { key: 'instagram', label: 'Instagram', url: 'https://www.instagram.com/offical_manisha_baroliya/' },
+    { key: 'facebook', label: 'Facebook', url: 'https://www.facebook.com/uxdesignermanisha/' },
+    { key: 'x', label: 'X', url: 'https://x.com/Manisha_Offical' },
+    { key: 'dribbble', label: 'Dribbble', url: 'https://dribbble.com/manisha_baroliya' },
+    { key: 'uilive', label: 'UI.Live', url: 'https://ui.live/profile/Manishabaroliya' },
+    { key: 'pinterest', label: 'Pinterest', url: 'https://in.pinterest.com/uxdesignermanisha/' },
+    { key: 'github', label: 'GitHub', url: 'https://github.com/manisha22stylewithmini-spec' },
+    { key: 'muzli', label: 'Muzli', url: 'https://me.muz.li/manisha_baroliya' },
   ],
+
 };

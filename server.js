@@ -58,8 +58,54 @@ function friendlyError(stderr) {
   const line = stderr.split('\n').reverse().find(l => l.startsWith('ERROR')) || stderr.trim().split('\n').pop() || 'Download failed.';
   const msg = line.replace(/^ERROR:\s*(\[[^\]]+\]\s*)?/, '').trim();
   if (/login|private|sign in|cookies/i.test(msg)) return 'This video is private or requires a login, so it cannot be downloaded.';
+  if (/no video formats|no video could be found/i.test(msg)) return 'No video was found at that link. GrabLink saves videos, and this looks like a photo or text post.';
   if (/unsupported url/i.test(msg)) return 'No downloadable video was found at that link.';
   return msg.slice(0, 300);
+}
+
+
+// Photo pins: a Pinterest pin with no video is a photo, so offer the photo instead of an error.
+const meta = (html, prop) => {
+  for (const tag of html.match(/<meta\b[^>]*>/g) || []) {
+    if (new RegExp(`(?:property|name)="${prop}"`).test(tag)) { const m = /content="([^"]*)"/.exec(tag); if (m) return m[1].replace(/&amp;/g, '&'); }
+  }
+  return '';
+};
+async function pinterestPhoto(url) {
+  try {
+    const r = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' }, signal: AbortSignal.timeout(10000) });
+    const host = new URL(r.url).hostname.toLowerCase();
+    if (!(host === 'pinterest.com' || host.endsWith('.pinterest.com'))) return null;
+    const html = await r.text();
+    const img = meta(html, 'og:image');
+    if (!/^https:\/\/[\w.-]*pinimg\.com\//.test(img)) return null;
+    const big = img.replace(/\/\d+x\//, '/originals/');
+    const ok = (await fetch(big, { method: 'HEAD' }).catch(() => null))?.ok;
+    const title = (meta(html, 'og:title').split('|')[0].trim().split('\n')[0].trim().slice(0, 80)) || 'Pinterest photo';
+    return { title, uploader: '', thumbnail: img, duration: null, source: 'Pinterest', options: [{ label: ok ? 'Photo (original size)' : 'Photo', url: ok ? big : img, ext: 'jpg', kind: 'image' }] };
+  } catch { return null; }
+}
+
+// Streams a media file from a known media host through this server (same job as api/dl.js on the live site).
+const DL_ALLOWED = ['pinimg.com', 'twimg.com', 'cdninstagram.com', 'fbcdn.net', 'tiktokcdn.com', 'tiktokcdn-us.com', 'tiktokv.com', 'googlevideo.com', 'vimeocdn.com', 'redd.it'];
+const dlOk = raw => { try { const u = new URL(raw); const h = u.hostname.toLowerCase(); return u.protocol === 'https:' && DL_ALLOWED.some(d => h === d || h.endsWith('.' + d)) ? u : null; } catch { return null; } };
+async function handleDl(req, res, p) {
+  let target = dlOk(p.get('u') || '');
+  if (!target) return json(res, 400, { error: 'That file is not on a supported site.' });
+  let up;
+  for (let i = 0; i < 4; i++) {
+    up = await fetch(target, { headers: { 'User-Agent': 'Mozilla/5.0', Referer: dlOk(p.get('r') || '')?.href || target.origin + '/' }, redirect: 'manual' }).catch(() => null);
+    if (!up) return json(res, 502, { error: 'Could not reach the video host.' });
+    if (up.status >= 300 && up.status < 400 && up.headers.get('location')) { target = dlOk(new URL(up.headers.get('location'), target).href); if (!target) return json(res, 400, { error: 'The video moved somewhere we cannot fetch from.' }); continue; }
+    break;
+  }
+  if (!up.ok || !up.body) return json(res, 403, { error: 'The site refused the download.' });
+  const ext = (p.get('e') || 'mp4').replace(/[^\w]/g, '').slice(0, 5) || 'mp4';
+  const name = (p.get('n') || 'video').replace(/[^\w\- ]+/g, '').trim().slice(0, 80) || 'video';
+  const headers = { 'Content-Type': { jpg: 'image/jpeg', mp4: 'video/mp4', mp3: 'audio/mpeg', m4a: 'audio/mp4' }[ext] || 'application/octet-stream', 'Content-Disposition': `attachment; filename="${name}.${ext}"` };
+  if (up.headers.get('content-length')) headers['Content-Length'] = up.headers.get('content-length');
+  res.writeHead(200, headers);
+  require('stream').Readable.fromWeb(up.body).pipe(res);
 }
 
 async function handleInfo(req, res, url) {
@@ -79,6 +125,7 @@ async function handleInfo(req, res, url) {
       hasVideo: heights.length > 0 || (info.vcodec && info.vcodec !== 'none'),
     });
   } catch (e) {
+    if (/no video formats|no video was found/i.test(e.message)) { const photo = await pinterestPhoto(url); if (photo) return json(res, 200, photo); }
     json(res, 422, { error: e.message });
   }
 }
@@ -166,10 +213,14 @@ http.createServer((req, res) => {
   if (u.pathname === '/api/info') return handleInfo(req, res, u.searchParams.get('url') || '');
   if (u.pathname === '/api/download') return handleDownload(req, res, u.searchParams);
   if (u.pathname === '/api/search') return handleSearch(req, res, u.searchParams);
+  if (u.pathname === '/api/dl') return handleDl(req, res, u.searchParams);
 
   const rel = u.pathname === '/' ? 'index.html' : u.pathname.slice(1);
   const file = path.join(PUBLIC, rel);
   if (!file.startsWith(PUBLIC + path.sep) || !fs.existsSync(file)) { res.writeHead(404); return res.end('Not found'); }
   res.writeHead(200, { 'Content-Type': MIME[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-cache' });
   fs.createReadStream(file).pipe(res);
+}).on('error', e => {
+  if (e.code === 'EADDRINUSE') { console.log(`Already running: open http://${HOST}:${PORT}  (to restart it, stop the old one first)`); process.exit(0); }
+  throw e;
 }).listen(PORT, HOST, () => console.log(`Video downloader running at http://${HOST}:${PORT}`));

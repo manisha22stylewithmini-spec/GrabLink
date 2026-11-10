@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbfaff">
+<title>GrabLink portfolio — Manisha Baroliya</title>
+<meta name="description" content="GrabLink: a free video downloader with no ads, no subscription and no account. Why I built it, the pain it solves and the solution, plus wireframes and the version 2.0 vision.">
+<link rel="icon" type="image/png" href="/icons/favicon-64.png">
+<link rel="canonical" href="https://grablink-manishabaroliya.vercel.app/portfolio.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GrabLink by Manisha Baroliya">
+<meta property="og:title" content="GrabLink portfolio — Manisha Baroliya">
+<meta property="og:description" content="A free video downloader with no ads, no subscription and no account. Why it exists, the pain it solves, the design and the version 2.0 vision.">
+<meta property="og:url" content="https://grablink-manishabaroliya.vercel.app/portfolio.html">
+<meta property="og:image" content="https://grablink-manishabaroliya.vercel.app/shots/og-portfolio.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="GrabLink app screens beside the headline and the words No ads, No paid plan, No account">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GrabLink portfolio — Manisha Baroliya">
+<meta name="twitter:description" content="A free video downloader with no ads, no subscription and no account. Why it exists, the pain it solves, the design and the version 2.0 vision.">
+<meta name="twitter:image" content="https://grablink-manishabaroliya.vercel.app/shots/og-portfolio.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="story.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the portfolio</a>
+
+<header class="bar">
+  <div class="wrap">
+    <a href="/" aria-label="GrabLink home"><img src="/brand/logo-wide.png" alt="Manisha Baroliya" width="587" height="302"></a>
+    <nav aria-label="More info">
+      <div class="menu" id="projMenu">
+        <button type="button" class="menu-btn" id="projBtn" aria-expanded="false" aria-controls="projList">
+          More info
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul class="menu-list" id="projList" hidden><li><a class="menu-item" href="/case-study.html"><b>Case study</b><span>Why I built it and what I learned</span></a></li><li><a class="menu-item is-active" href="/portfolio.html" aria-current="page"><b>Portfolio</b><span>Process, wireframes and final screens</span></a></li><li><a class="menu-item" href="/"><b>Live project</b><span>The GrabLink app you are using</span></a></li></ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap pf-hero">
+      <div>
+        <span class="kicker">Portfolio · Product design</span>
+        <h1>GrabLink: a video downloader with <span class="grad">no ads, no paywall, no account.</span></h1>
+        <p class="lead" style="margin-top:22px">Paste or share a link and get the video, straight inside the app you’re already using. Designed, written and built end to end.</p>
+        <ul class="chips" aria-label="What it costs you">
+          <li class="chip">No ads</li><li class="chip">No subscription</li><li class="chip">No account</li><li class="chip">Free to use</li>
+        </ul>
+        <div class="cta-row">
+          <a class="btn primary" href="/">Open the live app</a>
+          <a class="btn" href="case-study.html">Read the case study</a>
+        </div>
+      </div>
+      <div class="sign" aria-hidden="true"><img src="/icons/icon-512.png" alt="" width="512" height="512"></div>
+    </div>
+    <div class="wrap">
+      <dl class="meta">
+        <div><dt>Role</dt><dd>Product designer — research, UX, UI, front-end</dd></div>
+        <div><dt>Surfaces</dt><dd>Website, installable app, Chrome extension</dd></div>
+        <div><dt>Built with</dt><dd>HTML, CSS, JavaScript, PWA, Vercel</dd></div>
+        <div><dt>Status</dt><dd>Live · v1.1 · v2.0 in planning</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" id="story">
+    <div class="wrap">
+      <span class="kicker">The story in four lines</span>
+      <div class="grid g2">
+        <article class="card"><span class="num">POV</span><h3>My point of view</h3><p style="margin-top:10px">If you already hold the link to a video you’re allowed to keep, getting the file should take one paste and one tap. Everything else on the screen is somebody else’s business model.</p></article>
+        <article class="card"><span class="num">Why</span><h3>Why I built it</h3><p style="margin-top:10px">The experience around downloading is the real problem, not the technology. I wanted to show that a free, calm, honest tool can exist, and design every step of it.</p></article>
+        <article class="card"><span class="num">Pain</span><h3>The pain point</h3><ul class="ul" style="margin-top:10px"><li>Pages built to sell, with ads and look-alike buttons.</li><li>Quality and limits locked behind a plan.</li><li>Too many steps, and the link has to leave the app it lives in.</li><li>Errors that don’t say what went wrong.</li></ul></article>
+        <article class="card"><span class="num">Solution</span><h3>The solution</h3><ul class="ul" style="margin-top:10px"><li>One box: paste, share or accept the copied link.</li><li>The file saves inside the app, with progress. No detours.</li><li>No ads, no paid tier, no account. History stays on your device.</li><li>Plain-language errors that name the cause.</li></ul></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="process">
+    <div class="wrap">
+      <span class="kicker">Process</span>
+      <h2>From a belief to a working product</h2>
+      <ol class="flow">
+        <li><b>Discover</b>Mapped the pains and the landscape by category.</li>
+        <li><b>Define</b>Wrote the POV, the principles and three jobs to be done.</li>
+        <li><b>Wireframe</b>Low-fidelity flows for the link box, the result and the app tabs.</li>
+        <li><b>Design</b>A calm, light interface with one loud action.</li>
+        <li><b>Build</b>A website, an installable app and a Chrome extension.</li>
+        <li><b>Test</b>Tried real links on real platforms and fixed what broke.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="wireframes">
+    <div class="wrap">
+      <span class="kicker">Low-fidelity wireframes</span>
+      <h2>Early thinking, before any colour</h2>
+      <p class="lead" style="margin-bottom:26px">Rough layouts used to settle the structure before visual design: where the link box sits, how the quality choice works, and what the app’s tabs hold.</p>
+
+      <!-- WIREFRAME SLOTS: leave these frames empty until the wireframes are ready.
+           To add one, put an image inside its .wf-frame, for example:
+           <img src="/wireframes/home.png" alt="Wireframe of the home screen with a link box and a Grab button"> -->
+      <div class="wf-row phones">
+        <figure class="wf">
+          <div class="wf-frame phone" role="img" aria-label="Wireframe slot, empty: Home screen"></div>
+          <figcaption>01 · Home <span>Paste a link</span></figcaption>
+        </figure>
+        <figure class="wf">
+          <div class="wf-frame phone" role="img" aria-label="Wireframe slot, empty: Result and quality choice"></div>
+          <figcaption>02 · Result <span>Pick a quality</span></figcaption>
+        </figure>
+        <figure class="wf">
+          <div class="wf-frame phone" role="img" aria-label="Wireframe slot, empty: History"></div>
+          <figcaption>03 · History <span>Find it again</span></figcaption>
+        </figure>
+      </div>
+      <div class="wf-row" style="margin-top:20px">
+        <figure class="wf">
+          <div class="wf-frame wide" role="img" aria-label="Wireframe slot, empty: Website on a laptop"></div>
+          <figcaption>04 · Website on a laptop <span>One job, one screen</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="hifi">
+    <div class="wrap">
+      <span class="kicker">High-fidelity design</span>
+      <h2>The same structure, finished</h2>
+      <p class="lead" style="margin-bottom:28px">Screens from the running product. Calm surfaces, one loud action in lime, and the same layout on every size. Third-party video thumbnails are blurred.</p>
+      <div class="hifi">
+        <figure class="laptop">
+          <div class="lid"><img src="shots/site-laptop.jpg" width="2000" height="1250" alt="The GrabLink website on a laptop: a purple traffic light with a Download app sign on the left and a card on the right with the headline Paste now, Grab anytime, a link box and a list of supported platforms." loading="lazy"></div>
+          <div class="base" aria-hidden="true"></div>
+        </figure>
+        <div class="phones4">
+          <figure class="phone-fig"><div class="body"><img src="shots/app-home.jpg" width="780" height="1688" alt="App home: a By link and By keyword toggle, a paste box with a lime go button, and suggested topics." loading="lazy"></div><figcaption>Home<span>One box to start</span></figcaption></figure>
+          <figure class="phone-fig"><div class="body"><img src="shots/app-result.jpg" width="780" height="1688" alt="App result: a video preview, the title, a quality menu set to Best quality and a lime Download button." loading="lazy"></div><figcaption>Result<span>Quality, then Download</span></figcaption></figure>
+          <figure class="phone-fig"><div class="body"><img src="shots/app-settings.jpg" width="780" height="1688" alt="App settings: default quality, copied-link detection, auto-download and theme options as toggles and segments." loading="lazy"></div><figcaption>Settings<span>Everything optional, off by default</span></figcaption></figure>
+          <figure class="phone-fig"><div class="body"><img src="shots/app-alerts.jpg" width="780" height="1688" alt="App alerts: toggles for personalised suggestions and notifications, and a privacy policy row." loading="lazy"></div><figcaption>Alerts<span>Consent before anything</span></figcaption></figure>
+        </div>
+        <div>
+          <h3 style="margin-bottom:12px">Visual language</h3>
+          <ul class="swatches" aria-label="Colour palette">
+            <li><i style="background:#d6ff3d"></i>Lime · the one action</li>
+            <li><i style="background:#8b6bff"></i>Violet · brand</li>
+            <li><i style="background:#ff3d9a"></i>Pink · accent</li>
+            <li><i style="background:#160f2e"></i>Ink · text</li>
+            <li><i style="background:#fbfaff"></i>Paper · surface</li>
+          </ul>
+          <p style="margin-top:14px;color:var(--muted);font-size:.95rem">Type: <b>Unbounded</b> for headlines, <b>Manrope</b> for everything you read.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="shipped">
+    <div class="wrap">
+      <span class="kicker">What shipped</span>
+      <h2>Version 1 at a glance</h2>
+      <div class="grid g3">
+        <article class="card"><h3>One finder</h3><p style="margin-top:8px">Link or keyword in a single box, with a platform filter.</p></article>
+        <article class="card"><h3>Saves in-app</h3><p style="margin-top:8px">Progress bar, quality choice and no second page.</p></article>
+        <article class="card"><h3>Share and paste</h3><p style="margin-top:8px">Receives shared links where the browser allows, and offers a copied link when you open it.</p></article>
+        <article class="card"><h3>History on-device</h3><p style="margin-top:8px">No account. Filter by platform, clear any time.</p></article>
+        <article class="card"><h3>Consent first</h3><p style="margin-top:8px">Suggestions and notifications are off until you say yes.</p></article>
+        <article class="card"><h3>Three layouts</h3><p style="margin-top:8px">Phone, tablet and a compact laptop window.</p></article>
+      </div>
+      <h3 style="margin-top:34px">What testing taught me</h3>
+      <p>Some big platforms block downloads from hosted servers, so the honest design is to say so plainly and move the work onto the person’s own device. A short-link Pinterest video that failed now downloads. The full account, with a table of what works and what doesn’t, is in the <a href="case-study.html#reality">case study</a>.</p>
+    </div>
+  </section>
+
+  <section class="section" id="v2">
+    <div class="wrap">
+      <span class="kicker">Version 2.0 · The vision</span>
+      <h2>From “download” to <span class="grad">“it’s in your gallery.”</span></h2>
+      <blockquote class="quote">
+        <p>Tap Share in any app, tap GrabLink, and the video is in your gallery. No Downloads folder, no moving files, no leaving the feed.</p>
+        <cite>— The goal for the next version</cite>
+      </blockquote>
+      <div class="grid g3" style="margin-top:20px">
+        <article class="card"><h3>One-tap save</h3><p style="margin-top:8px">A small sheet slides up over the app you’re in. One button saves it to a GrabLink album.</p></article>
+        <article class="card"><h3>Video, photos and covers</h3><p style="margin-top:8px">The same tap can save a video, a photo post or just the cover image.</p></article>
+        <article class="card"><h3>Smart and quiet</h3><p style="margin-top:8px">Tells you if it’s already saved, and queues the save when you’re offline.</p></article>
+      </div>
+      <p style="margin-top:18px;font-size:.92rem;color:var(--muted)">A plan to validate, not a shipped feature. The feasibility notes, risks and test plan are in the <a href="case-study.html#v2">case study</a>.</p>
+
+      <!-- Version 2.0 wireframe slots: leave empty until the wireframes are ready. -->
+      <div class="wf-row phones" style="margin-top:22px">
+        <figure class="wf">
+          <div class="wf-frame phone" role="img" aria-label="Wireframe slot, empty: Share menu with GrabLink"></div>
+          <figcaption>V2 · Share menu <span>GrabLink in the row</span></figcaption>
+        </figure>
+        <figure class="wf">
+          <div class="wf-frame phone" role="img" aria-label="Wireframe slot, empty: One-tap save sheet"></div>
+          <figcaption>V2 · Save sheet <span>One button</span></figcaption>
+        </figure>
+        <figure class="wf">
+          <div class="wf-frame phone" role="img" aria-label="Wireframe slot, empty: Saved confirmation"></div>
+          <figcaption>V2 · Saved <span>Open · Undo</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="next">
+        <h2>Want the full thinking behind it?</h2>
+        <a class="btn" href="case-study.html">Read the case study →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>Designed &amp; built by <b>Manisha Baroliya</b></span>
+    <ul class="foot-social" id="socialList" aria-label="Connect with the designer"></ul>
+    <span><a href="case-study.html">Case study</a> · <a href="/">GrabLink</a></span>
+  </div>
+</footer>
+<script src="site-config.js"></script>
+<script src="story.js"></script>
+</body>
+</html>

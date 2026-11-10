@@ -851,3 +851,14 @@ button.sign:focus-visible { outline: 3px solid var(--accent); outline-offset: 4p
 /* footer legal: one line, "© 2026 GrabLink · Privacy" */
 .foot-meta { flex-direction: row; align-items: center; justify-content: flex-end; gap: 8px; white-space: nowrap; }
 .foot-meta .link-btn::before { content: "·"; margin-right: 8px; color: var(--muted); text-decoration: none; display: inline-block; }
+
+/* "More info" menu: the page you're on gets its own look */
+.menu-item { position: relative; transition: background .15s ease; }
+.menu-item.is-active { background: rgba(214, 255, 61, .3); box-shadow: inset 3px 0 0 var(--violet); padding-left: 16px; }
+:root[data-theme="light"] .menu-item.is-active { background: rgba(214, 255, 61, .45); }
+.menu-item.is-active b { display: flex; align-items: center; gap: 8px; }
+.menu-item.is-active b::after { content: "You're here"; margin-left: auto; padding: 2px 9px; border-radius: 999px; background: var(--violet); color: #fff; font: 800 .62rem "Manrope", sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+
+/* ten social icons: wrap on narrow screens instead of widening the page */
+.foot-social { flex-wrap: wrap; }
+@media (max-width: 600px) { .soc { width: 32px; height: 32px; } }
